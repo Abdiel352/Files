@@ -46,15 +46,15 @@ public class CreateTextFileGUI{
     }
 
     public void addRecords() {
-        // Loop para receber entradas do usuário
+    // Loop para receber entradas do usuário
         while (true) {
             // Mostra uma caixa de entrada para o usuário
             String line = JOptionPane.showInputDialog(null, "Digite o número da conta (> 0), primeiro nome, sobrenome e saldo. Para encerrar a entrada, digite 'sair'.");
-            
+
             if (line == null || line.equalsIgnoreCase("sair")) {
                 break;
             }
-            
+
             try {
                 String[] inputs = line.split(" ");
                 int account = Integer.parseInt(inputs[0]);
@@ -71,9 +71,13 @@ public class CreateTextFileGUI{
             } catch (FormatterClosedException formatterClosedException) {
                 JOptionPane.showMessageDialog(null, "Erro ao escrever no arquivo.", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
-            } /*catch (NumberFormatException | ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Entrada inválida. Por favor, tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
-            }*/
+            } catch (ArrayIndexOutOfBoundsException e) {
+                JOptionPane.showMessageDialog(null, "Entrada incompleta. Por favor, forneça todos os dados.", "Erro", JOptionPane.ERROR_MESSAGE);
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(null, "Argumento inválido. Por favor, tente novamente.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
